@@ -12,7 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Í¼Æ¬ÏàËÆ¶È·ÖÎö
+ * å›¾ç‰‡ç›¸ä¼¼åº¦åˆ†æ
  * @author Administrator
  */
 public class SimilarityAnalysisor {
@@ -21,7 +21,7 @@ public class SimilarityAnalysisor {
 	
 	public static double getSimilarity(File imgFile1, File imgFile2){
 		if(isImageFile(imgFile1) && isImageFile(imgFile2)){
-			// »ñÈ¡Á½¸öÍ¼µÄººÃ÷¾àÀë
+			// è·å–ä¸¤ä¸ªå›¾çš„æ±‰æ˜è·ç¦»
 			
 			Image picImage1 = file2Image(imgFile1);
 			Image picImage2 = file2Image(imgFile2);
@@ -29,18 +29,18 @@ public class SimilarityAnalysisor {
 		    		getPixelsWithHanming(picImage1), 
 		    		getPixelsWithHanming(picImage2));
 		    
-		    // Çå¿ÕÍ¼Æ¬Õ¼ÓÃµÄÄÚ´æ
+		    // æ¸…ç©ºå›¾ç‰‡å ç”¨çš„å†…å­˜
 		    picImage1.flush();
 		    picImage2.flush();
 		    
-		    // Í¨¹ıººÃ÷¾àÀë¼ÆËãÏàËÆ¶È£¬È¡Öµ·¶Î§ [0.0, 1.0]
+		    // é€šè¿‡æ±‰æ˜è·ç¦»è®¡ç®—ç›¸ä¼¼åº¦ï¼Œå–å€¼èŒƒå›´ [0.0, 1.0]
 		    return calSimilarity(hammingDistance);
 		}
 		return 0D;
 	}
 	
 	/**
-	 * ÎÄ¼ş¶ÔÏó×ªImage¶ÔÏó
+	 * æ–‡ä»¶å¯¹è±¡è½¬Imageå¯¹è±¡
 	 * @param image
 	 * @return
 	 */
@@ -54,22 +54,22 @@ public class SimilarityAnalysisor {
 	}
 	
 	private static int[] getPixelsWithHanming(Image image){
-		// ×ª»»ÖÁ»Ò¶È
+		// è½¬æ¢è‡³ç°åº¦
 		image = toGrayscale(image);
-	    // ËõĞ¡³É32x32µÄËõÂÔÍ¼
+	    // ç¼©å°æˆ32x32çš„ç¼©ç•¥å›¾
 	    image = scale(image);
-	    // »ñÈ¡»Ò¶ÈÏñËØÊı×é
+	    // è·å–ç°åº¦åƒç´ æ•°ç»„
 	    int[] pixels = getPixels(image);
-	    //ÊÍ·ÅÍ¼Æ¬¶ÔÏó
+	    //é‡Šæ”¾å›¾ç‰‡å¯¹è±¡
 	    image.flush();
-	    // »ñÈ¡Æ½¾ù»Ò¶ÈÑÕÉ«
+	    // è·å–å¹³å‡ç°åº¦é¢œè‰²
 	    int averageColor = getAverageOfPixelArray(pixels);
-	    // »ñÈ¡»Ò¶ÈÏñËØµÄ±È½ÏÊı×é£¨¼´Í¼ÏñÖ¸ÎÆĞòÁĞ£©
+	    // è·å–ç°åº¦åƒç´ çš„æ¯”è¾ƒæ•°ç»„ï¼ˆå³å›¾åƒæŒ‡çº¹åºåˆ—ï¼‰
 	    return getPixelDeviateWeightsArray(pixels, averageColor);
 	}
 	
 	/**(
-	 * ÅĞ¶ÏÊÇ·ñÊÇÍ¼Æ¬ÎÄ¼ş
+	 * åˆ¤æ–­æ˜¯å¦æ˜¯å›¾ç‰‡æ–‡ä»¶
 	 * @param f
 	 * @return
 	 */
@@ -91,7 +91,7 @@ public class SimilarityAnalysisor {
 	private SimilarityAnalysisor() {
 	}
 
-	//	 ½«ÈÎÒâImageÀàĞÍÍ¼Ïñ×ª»»ÎªBufferedImageÀàĞÍ£¬·½±ãºóĞø²Ù×÷
+	//	 å°†ä»»æ„Imageç±»å‹å›¾åƒè½¬æ¢ä¸ºBufferedImageç±»å‹ï¼Œæ–¹ä¾¿åç»­æ“ä½œ
 	private static BufferedImage convertToBufferedFrom(Image srcImage) {
 		BufferedImage bufferedImage = new BufferedImage(
 				srcImage.getWidth(null), srcImage.getHeight(null),
@@ -102,7 +102,7 @@ public class SimilarityAnalysisor {
 		return bufferedImage;
 	}
 
-	//	 ×ª»»ÖÁ»Ò¶ÈÍ¼
+	//	 è½¬æ¢è‡³ç°åº¦å›¾
 	private static BufferedImage toGrayscale(Image image) {
 		BufferedImage sourceBuffered = convertToBufferedFrom(image);
 		ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
@@ -111,13 +111,13 @@ public class SimilarityAnalysisor {
 		return grayBuffered;
 	}
 
-	//	 Ëõ·ÅÖÁ32x32ÏñËØËõÂÔÍ¼
+	//	 ç¼©æ”¾è‡³32x32åƒç´ ç¼©ç•¥å›¾
 	private static Image scale(Image image) {
 		image = image.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		return image;
 	}
 
-	//	 »ñÈ¡ÏñËØÊı×é
+	//	 è·å–åƒç´ æ•°ç»„
 	private static int[] getPixels(Image image) {
 		int width = image.getWidth(null);
 		int height = image.getHeight(null);
@@ -126,7 +126,7 @@ public class SimilarityAnalysisor {
 		return pixels;
 	}
 
-	//	 »ñÈ¡»Ò¶ÈÍ¼µÄÆ½¾ùÏñËØÑÕÉ«Öµ
+	//	 è·å–ç°åº¦å›¾çš„å¹³å‡åƒç´ é¢œè‰²å€¼
 	private static int getAverageOfPixelArray(int[] pixels) {
 		Color color;
 		long sumRed = 0;
@@ -138,7 +138,7 @@ public class SimilarityAnalysisor {
 		return averageRed;
 	}
 
-	//	 »ñÈ¡»Ò¶ÈÍ¼µÄÏñËØ±È½ÏÊı×é£¨Æ½¾ùÖµµÄÀë²î£©
+	//	 è·å–ç°åº¦å›¾çš„åƒç´ æ¯”è¾ƒæ•°ç»„ï¼ˆå¹³å‡å€¼çš„ç¦»å·®ï¼‰
 	private static int[] getPixelDeviateWeightsArray(int[] pixels,
 			final int averageColor) {
 		Color color;
@@ -150,7 +150,7 @@ public class SimilarityAnalysisor {
 		return dest;
 	}
 
-	//	 »ñÈ¡Á½¸öËõÂÔÍ¼µÄÆ½¾ùÏñËØ±È½ÏÊı×éµÄººÃ÷¾àÀë£¨¾àÀëÔ½´ó²îÒìÔ½´ó£©
+	//	 è·å–ä¸¤ä¸ªç¼©ç•¥å›¾çš„å¹³å‡åƒç´ æ¯”è¾ƒæ•°ç»„çš„æ±‰æ˜è·ç¦»ï¼ˆè·ç¦»è¶Šå¤§å·®å¼‚è¶Šå¤§ï¼‰
 	private static int getHammingDistance(int[] a, int[] b) {
 		int sum = 0;
 		for (int i = 0; i < a.length; i++) {
@@ -159,12 +159,12 @@ public class SimilarityAnalysisor {
 		return sum;
 	}
 
-	//	 Í¨¹ıººÃ÷¾àÀë¼ÆËãÏàËÆ¶È
+	//	 é€šè¿‡æ±‰æ˜è·ç¦»è®¡ç®—ç›¸ä¼¼åº¦
 	private static double calSimilarity(int hammingDistance) {
 		int length = 32 * 32;
 		double similarity = (length - hammingDistance) / (double) length;
 
-		// Ê¹ÓÃÖ¸ÊıÇúÏßµ÷ÕûÏàËÆ¶È½á¹û
+		// ä½¿ç”¨æŒ‡æ•°æ›²çº¿è°ƒæ•´ç›¸ä¼¼åº¦ç»“æœ
 		similarity = Math.pow(similarity, 2);
 		return similarity;
 	}
