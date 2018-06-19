@@ -7,6 +7,7 @@ import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -45,8 +46,8 @@ public class SimilarityAnalysisor {
 	 * @return
 	 */
 	private static Image file2Image(File image){
-		try {
-			return ImageIO.read(image);
+		try (FileInputStream fis = new FileInputStream(image);){
+			return ImageIO.read(fis);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
