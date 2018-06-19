@@ -1,0 +1,10 @@
+/bin/
+/.project
+/.classpath
+/.fatjar
+/Spider.jar
+/.git
+/logs/
+/Spider.iml
+*.class
+/out/
