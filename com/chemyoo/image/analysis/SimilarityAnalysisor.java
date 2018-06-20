@@ -107,8 +107,7 @@ public class SimilarityAnalysisor {
 		BufferedImage sourceBuffered = convertToBufferedFrom(image);
 		ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
 		ColorConvertOp op = new ColorConvertOp(cs, null);
-		BufferedImage grayBuffered = op.filter(sourceBuffered, null);
-		return grayBuffered;
+		return op.filter(sourceBuffered, null);
 	}
 
 	//	 缩放至32x32像素缩略图
@@ -121,9 +120,8 @@ public class SimilarityAnalysisor {
 	private static int[] getPixels(Image image) {
 		int width = image.getWidth(null);
 		int height = image.getHeight(null);
-		int[] pixels = convertToBufferedFrom(image).getRGB(0, 0, width, height,
+		return convertToBufferedFrom(image).getRGB(0, 0, width, height,
 				null, 0, width);
-		return pixels;
 	}
 
 	//	 获取灰度图的平均像素颜色值
@@ -134,13 +132,11 @@ public class SimilarityAnalysisor {
 			color = new Color(pixels[i], true);
 			sumRed += color.getRed();
 		}
-		int averageRed = (int) (sumRed / pixels.length);
-		return averageRed;
+		return (int) (sumRed / pixels.length);
 	}
 
 	//	 获取灰度图的像素比较数组（平均值的离差）
-	private static int[] getPixelDeviateWeightsArray(int[] pixels,
-			final int averageColor) {
+	private static int[] getPixelDeviateWeightsArray(int[] pixels, int averageColor) {
 		Color color;
 		int[] dest = new int[pixels.length];
 		for (int i = 0; i < pixels.length; i++) {
