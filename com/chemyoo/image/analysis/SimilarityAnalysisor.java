@@ -22,10 +22,9 @@ public class SimilarityAnalysisor {
 	
 	public static double getSimilarity(File imgFile1, File imgFile2){
 		if(isImageFile(imgFile1) && isImageFile(imgFile2)){
-			// 获取两个图的汉明距离
-			
 			Image picImage1 = file2Image(imgFile1);
 			Image picImage2 = file2Image(imgFile2);
+			// 获取两个图的汉明距离
 		    int hammingDistance = getHammingDistance(
 		    		getPixelsWithHanming(picImage1), 
 		    		getPixelsWithHanming(picImage2));
