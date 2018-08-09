@@ -12,13 +12,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.sun.imageio.plugins.common.ImageUtil;
+
 /**
  * 图片相似度分析
  * @author Administrator
  */
 public class SimilarityAnalysisor {
 	
-	private static final String IMGAGE_EXT = "jpg,jpeg,png,bmp,gif";
+	private static final String IMGAGE_EXT = ImageIO.getReaderFormatNames().toString();
 	
 	public static double getSimilarity(File imgFile1, File imgFile2){
 		if(isImageFile(imgFile1) && isImageFile(imgFile2)){
