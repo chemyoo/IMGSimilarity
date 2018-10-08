@@ -12,8 +12,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.sun.imageio.plugins.common.ImageUtil;
-
 /**
  * 图片相似度分析
  * @author Administrator
@@ -93,7 +91,7 @@ public class SimilarityAnalysisor {
 	private SimilarityAnalysisor() {
 	}
 
-	//	 将任意Image类型图像转换为BufferedImage类型，方便后续操作
+	// 将任意Image类型图像转换为BufferedImage类型，方便后续操作
 	private static BufferedImage convertToBufferedFrom(Image srcImage) {
 		BufferedImage bufferedImage = new BufferedImage(
 				srcImage.getWidth(null), srcImage.getHeight(null),
@@ -104,7 +102,7 @@ public class SimilarityAnalysisor {
 		return bufferedImage;
 	}
 
-	//	 转换至灰度图
+	// 转换至灰度图
 	private static BufferedImage toGrayscale(Image image) {
 		BufferedImage sourceBuffered = convertToBufferedFrom(image);
 		ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
@@ -112,13 +110,13 @@ public class SimilarityAnalysisor {
 		return op.filter(sourceBuffered, null);
 	}
 
-	//	 缩放至32x32像素缩略图
+	// 缩放至32x32像素缩略图
 	private static Image scale(Image image) {
 		image = image.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		return image;
 	}
 
-	//	 获取像素数组
+	// 获取像素数组
 	private static int[] getPixels(Image image) {
 		int width = image.getWidth(null);
 		int height = image.getHeight(null);
@@ -126,7 +124,7 @@ public class SimilarityAnalysisor {
 				null, 0, width);
 	}
 
-	//	 获取灰度图的平均像素颜色值
+	// 获取灰度图的平均像素颜色值
 	private static int getAverageOfPixelArray(int[] pixels) {
 		Color color;
 		long sumRed = 0;
@@ -137,7 +135,7 @@ public class SimilarityAnalysisor {
 		return (int) (sumRed / pixels.length);
 	}
 
-	//	 获取灰度图的像素比较数组（平均值的离差）
+	// 获取灰度图的像素比较数组（平均值的离差）
 	private static int[] getPixelDeviateWeightsArray(int[] pixels, int averageColor) {
 		Color color;
 		int[] dest = new int[pixels.length];
@@ -148,7 +146,7 @@ public class SimilarityAnalysisor {
 		return dest;
 	}
 
-	//	 获取两个缩略图的平均像素比较数组的汉明距离（距离越大差异越大）
+	// 获取两个缩略图的平均像素比较数组的汉明距离（距离越大差异越大）
 	private static int getHammingDistance(int[] a, int[] b) {
 		int sum = 0;
 		for (int i = 0; i < a.length; i++) {
@@ -157,7 +155,7 @@ public class SimilarityAnalysisor {
 		return sum;
 	}
 
-	//	 通过汉明距离计算相似度
+	// 通过汉明距离计算相似度
 	private static double calSimilarity(int hammingDistance) {
 		int length = 32 * 32;
 		double similarity = (length - hammingDistance) / (double) length;
