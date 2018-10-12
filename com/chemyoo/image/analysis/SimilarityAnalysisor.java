@@ -9,6 +9,7 @@ import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -18,7 +19,10 @@ import javax.imageio.ImageIO;
  */
 public class SimilarityAnalysisor {
 	
-	private static final String IMGAGE_EXT = ImageIO.getReaderFormatNames().toString();
+	private static final String IMGAGE_EXT = Arrays.toString(ImageIO.getReaderFormatNames());
+	
+	private static final int W = 32;
+	private static final int H = 32;
 	
 	public static double getSimilarity(File imgFile1, File imgFile2){
 		if(isImageFile(imgFile1) && isImageFile(imgFile2)){
@@ -112,7 +116,7 @@ public class SimilarityAnalysisor {
 
 	// 缩放至32x32像素缩略图
 	private static Image scale(Image image) {
-		image = image.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		image = image.getScaledInstance(W, H, Image.SCALE_SMOOTH);
 		return image;
 	}
 
@@ -157,7 +161,7 @@ public class SimilarityAnalysisor {
 
 	// 通过汉明距离计算相似度
 	private static double calSimilarity(int hammingDistance) {
-		int length = 32 * 32;
+		int length = W * H;
 		double similarity = (length - hammingDistance) / (double) length;
 
 		// 使用指数曲线调整相似度结果
