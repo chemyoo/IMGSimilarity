@@ -42,16 +42,16 @@
     </developers>
 
 	<distributionManagement>
-    <repository>
-        <id>sonatype-nexus-release</id>
-        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-
-    <snapshotRepository>
-        <id>sonatype-nexus-snapshot</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-</distributionManagement>
+	    <repository>
+	        <id>sonatype-nexus-release</id>
+	        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	    </repository>
+	
+	    <snapshotRepository>
+	        <id>sonatype-nexus-snapshot</id>
+	        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+	    </snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<finalName>${artifactId}</finalName>
