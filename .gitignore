@@ -9,3 +9,4 @@
 *.class
 /out/
 /IMGSimilarity-1.0.jar
+/target/
