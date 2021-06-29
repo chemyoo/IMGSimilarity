@@ -170,8 +170,8 @@ public class SimilarityAnalysisor {
 	}
 	
 	public static void main(String[] args) {
-		File f1 = new File("F:/picture/images/2345.jpg");
-		File f2 = new File("F:/picture/images/1529244174585.jpg");
+		File f1 = new File("F:\\picture\\images\\2019-11-06\\2019110620411922a01.jpg");
+		File f2 = new File("F:\\picture\\images\\2019-11-06\\22a02.jpg");
 		System.err.println(SimilarityAnalysisor.getSimilarity(f1, f2));
 	}
 }
